@@ -11,7 +11,7 @@ class PixFacilPage extends StatelessWidget {
 
   PixFacilController pixFacilController = Get.put(PixFacilController());
 
-  var waiting = true.obs;
+  var waiting = false.obs;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -42,7 +42,7 @@ class PixFacilPage extends StatelessWidget {
                         CpfInputFormatter()
                       ],
                       validator: (value) {
-                        if (value == null) {
+                        if (value!.isEmpty) {
                           return 'Campo obrigatório';
                         }
                         return null;
@@ -77,7 +77,7 @@ class PixFacilPage extends StatelessWidget {
                       ),
                       keyboardType: TextInputType.emailAddress,
                       validator: (value){
-                        if(value == null){
+                        if(value!.isEmpty){
                           return 'Campo obrigatório';
                         }
                         return null;
@@ -95,7 +95,7 @@ class PixFacilPage extends StatelessWidget {
                           border: OutlineInputBorder()
                       ),
                       validator: (value){
-                        if(value == null){
+                        if(value!.isEmpty){
                           return 'Campo obrigatório';
                         }
 
@@ -116,7 +116,7 @@ class PixFacilPage extends StatelessWidget {
                           border: OutlineInputBorder()
                       ),
                       validator: (value){
-                        if(value == null){
+                        if(value!.isEmpty){
                           return 'Campo obrigatório';
                         }
                         return null;
@@ -134,7 +134,7 @@ class PixFacilPage extends StatelessWidget {
                           border: OutlineInputBorder()
                       ),
                       validator: (value) {
-                        if(value == null){
+                        if(value!.isEmpty){
                           return 'Campo obrigatório';
                         }
                         return null;
@@ -152,7 +152,7 @@ class PixFacilPage extends StatelessWidget {
                           border: OutlineInputBorder()
                       ),
                       validator: (value){
-                        if(value == null){
+                        if(value!.isEmpty){
                           return 'Campo obrigatório';
                         }
                         return null;
@@ -170,7 +170,7 @@ class PixFacilPage extends StatelessWidget {
                           border: OutlineInputBorder()
                       ),
                       validator: (value){
-                        if(value == null){
+                        if(value!.isEmpty){
                           return 'Campo obrigatório';
                         }
                         return null;
@@ -184,24 +184,26 @@ class PixFacilPage extends StatelessWidget {
 
                     Obx(() => waiting.value == true
                         ? Center(
-                      child: CircularProgressIndicator(),
-                    ) : ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.amber,
-                          padding: const EdgeInsets.all(20)
-                        ),
-                        onPressed: () async {
-                          waiting.value = true;
-                          if(_formKey.currentState!.validate()){
-                            var consultaCPF = await pixFacilController.validarCPF();
-                            if(consultaCPF){
-                              print(consultaCPF);
-                            }
-                          }
-                          waiting.value = false;
-                        },
-                        child: Text('Prosseguir')
-                      )
+                            child: CircularProgressIndicator(),
+                        ) : ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.amber,
+                              padding: const EdgeInsets.all(20)),
+                              onPressed: () async {
+                                // waiting.value = true;
+                                // // if(_formKey.currentState!.validate()){
+                                // //   var consultaCPF = await pixFacilController.validarCPF();
+                                // //   if(consultaCPF){
+                                // //     print(consultaCPF);
+                                // //   }
+                                // // }
+                                // waiting.value = false;
+                                if(_formKey.currentState!.validate()){
+                                  print('ok');
+                                }
+                              },
+                              child: Text('Prosseguir')
+                            )
                     )
 
                   ],
