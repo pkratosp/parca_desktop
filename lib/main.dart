@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:parca_desktop/pages.dart';
 import 'package:parca_desktop/routes.dart';
 
+import 'package:parca_desktop/theme.dart';
+
 //flutter run -d windows para rodar no windows
 void main() {
   runApp(const MyApp());
@@ -17,6 +19,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Parça desktop',
       getPages: AppPages.routes,
+      theme: tema,
       initialRoute: Routes.HOME,
       debugShowCheckedModeBanner: false,
     );
